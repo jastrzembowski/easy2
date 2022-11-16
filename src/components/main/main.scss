@@ -1,0 +1,200 @@
+@import "../../index.scss";
+
+.head-img1 {
+  position: absolute;
+  top: 150px;
+  right: 30%;
+  left: auto;
+  height: 300px;
+  z-index: 2;
+  width: 300px;
+}
+.head-img2 {
+  position: absolute;
+  top: 350px;
+  right: -5%;
+  left: auto;
+  height: 300px;
+  width: 300px;
+  z-index: 2;
+}
+.head-circle {
+  content: "";
+  display: block;
+  width: 150px;
+  position: absolute;
+  top: 140px;
+  z-index: 1;
+  height: 150px;
+  border-radius: 50%;
+  left: auto;
+  right: 25%;
+  background-color: $orange;
+}
+.head-square {
+  content: "";
+  display: block;
+  width: 300px;
+  height: 100px;
+  position: absolute;
+  top: 330px;
+  z-index: 0;
+  left: auto;
+  transform: rotate(45deg);
+  right: 32%;
+  background-color: $green;
+}
+.head-orn {
+  content: "";
+  display: block;
+  width: 1000px;
+  height: 800px;
+  top: -300px;
+  right: -400px;
+  z-index: -1;
+  position: absolute;
+  background-color: $cream;
+  border-radius: 300px;
+}
+
+.head-text {
+  position: absolute;
+  margin-left: 100px;
+  width: 600px;
+  top: 30%;
+  h1 {
+    font-family: "Josefin Sans", sans-serif;
+    color: $dark-green;
+    text-transform: uppercase;
+    line-height: 1.5;
+    font-weight: 800;
+    font-size: 45px;
+
+    padding-bottom: 10px;
+    border-bottom: 2px solid $dark-green;
+  }
+  p {
+    width: 400px;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 400;
+    color: $main-dark;
+  }
+}
+.header-main {
+  height: 90vh;
+}
+
+.main-feta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "Josefin Sans", sans-serif;
+    .feta-lines{
+        content: "";
+        width: 100px;
+        height: 30px;
+        background: $orange;
+        position: relative;
+        top: 600px;
+        transform: rotate(135deg);
+        left: -70px;
+        right: auto;
+    }
+  img {
+    width: 450px;
+    height: 600px;
+    margin-left: 50px;
+    object-fit: cover;
+
+  }
+  aside {
+    width: 500px;
+    height: 400px;
+    padding-left: 20px;
+    border-left: 3px solid $green;
+    margin-top: 100px;
+    transform: translateX(-100px);
+    h1 {
+      font-size: 60px;
+      text-transform: uppercase;
+      color: $dark-green;
+    }
+    h3 {
+      font-size: 30px;
+      color: $dark-green;
+      font-weight: 400;
+    }
+    button {
+      background-color: $green;
+      border: 0px;
+      padding: 14px 25px;
+      text-align: left;
+      text-transform: uppercase;
+      font-family: "Josefin Sans", sans-serif;
+      color: white;
+      font-weight: 700;
+      font-size: 12px;
+    }
+  }
+  .feta-circle1 {
+    content: "";
+    display: block;
+    width: 150px;
+    z-index: 1;
+    height: 150px;
+    border-radius: 50%;
+    left: auto;
+    right: 25%;
+    background-color: $light-blue;
+    transform: translateX(-100px);
+  }
+  .feta-circle2 {
+    content: "";
+    display: block;
+    width: 150px;
+    z-index: 1;
+
+    height: 150px;
+    border-radius: 50%;
+    transform: translateX(-700px) translateY(500px);
+    background-color: $cream;
+  }
+}
+ .crt-no-user-image {
+    display: none !important;
+}
+.crt-tag{
+    display: none !important;
+}
+.crt-feed{
+    padding: 0px 50px;
+    display: flex;
+    justify-content: center;
+}
+.crt-grid-post{
+    padding: 10px !important;
+}
+.feed-text{
+    padding: 50px 15%;
+    color: $dark-green;
+    text-transform: uppercase;
+    h1{
+        font-size: 40px;
+    }
+    h3{
+        font-size: 30px;
+        margin: 0px;
+    }
+    .feed-circle {
+        content: "";
+        display: block;
+        width: 150px;
+        z-index: 1;
+        position: absolute;
+        right: 20%;transform: translateY(-100px);
+        left: auto;
+        height: 150px;
+        border-radius: 50%;
+        background-color: $orange;
+      }
+}

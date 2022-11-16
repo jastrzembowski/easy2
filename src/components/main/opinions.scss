@@ -1,0 +1,31 @@
+@import "../../index.scss";
+
+.opinions{
+    margin: 100px 20% 50px;
+    border-top: 2px solid $green;
+    padding-top: 50px;
+    border-bottom: 2px solid $green;
+    
+    .opinions-box{
+        height: 350px;
+
+        text-align: center;
+        h1{
+            color: $dark-green;
+            font-weight: 400;
+
+        }   
+        p{
+            height: 150px;
+            line-height: 1.6;
+            font-weight: 100;
+            width: 80%;
+            margin: auto;
+        }
+        .star-holder svg{
+            color: $orange;
+            padding: 2px;
+            font-size: 18px;
+        }
+    }
+}
