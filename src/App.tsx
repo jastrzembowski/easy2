@@ -5,7 +5,7 @@ import {AnimatePresence} from "framer-motion"
 import "./App.css";
 import Main from "./components/main/Main";
 import Nav from "./components/nav/Nav";
-import CreateContainer from "./components/CreateContainer"
+import CreateContainer from "./components/createcontainer/CreateContainer"
 import Business from "./components/bussiness/Business";
 
 function App() {

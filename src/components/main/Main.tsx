@@ -26,14 +26,9 @@ const Main = () => {
             zawsze świeże, dlatego codziennie znajdziesz u nas coś nowego!
           </p>
         </article>
-        <img src={head1} alt="wątróbka" className="head-img1"></img>
-        <img src={head2} alt="kotlet" className="head-img2"></img>
-        <span className="head-circle"></span>
-        <span className="head-circle2"></span>
-        <span className="head-square"></span>
-        <span className="head-orn"></span>
+    
       </header>
-      <article className="main-feta">
+      {/* <article className="main-feta">
         <img src={feta1} alt="feta" />
         <span className="feta-lines"></span>
         <span className="feta-circle1"></span>
@@ -50,7 +45,7 @@ const Main = () => {
             Dowiedz się więcej
           </button>
         </aside>
-      </article>
+      </article> */}
 
       <Opinions/>
 
@@ -59,10 +54,10 @@ const Main = () => {
             Znajdź nas na facebooku
         </h1>
         <h3>i bądź na bieżąco</h3>
-        <span className="feed-circle"></span>
+        {/* <span className="feed-circle"></span> */}
   
       </div>
-      <div id="curator-feed-default-feed-layout"></div>
+      {/* <div id="curator-feed-default-feed-layout"></div> */}
     <Footer/>
     </>
   );

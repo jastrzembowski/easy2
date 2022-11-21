@@ -48,7 +48,7 @@ const Nav = () => {
     dispatch({ type: actionType.SET_USER, user: null });
   };
   const changeNav = () => {
-    if (window.scrollY >= 50) {
+    if (window.scrollY >= 30) {
       setNavbar(true);
     } else {
       setNavbar(false);
@@ -62,19 +62,25 @@ const Nav = () => {
       <p className="nav-address">Gdańsk, Warneńska 8c/2 | 575 535 645</p>
       <nav
         className={
-          navbar ? "navbar navbar-white" : " navbar navbar-transparent"
+          navbar ? "desktop navbar-white" : " desktop navbar-transparent"
         }
       >
         <ul className="nav-buttons__holder">
-          <li>MENU</li>
+          <li>
+            {" "}
+            <Link to="/for-business">MENU</Link>
+          </li>
           <li>
             <Link to="/for-business">DLA FIRM </Link>
           </li>
-          <li>CATERING</li>
+          <li>
+            {" "}
+            <Link to="/for-business">CATERING </Link>
+          </li>
         </ul>
         <Link to="/">
           {" "}
-          <img src={easylogo} alt="logo easybar"></img>
+          <img src={easylogo} alt="logo easybar" className="nav-logo"></img>
         </Link>
         <motion.ul
           initial={{ opacity: 0, x: 200 }}
@@ -82,18 +88,19 @@ const Nav = () => {
           exit={{ opacity: 0, x: 200 }}
           className="nav-contact__box"
         >
-          <li>
+          <motion.li whileTap={{ scale: 0.1 }}>
             <FontAwesomeIcon icon={faEnvelope} />
-          </li>
-          <li>
+          </motion.li>
+          <motion.li whileTap={{ scale: 0.6 }}>
             <FontAwesomeIcon icon={faFacebook} />
-          </li>
-          <li>
+          </motion.li>
+
+          <motion.li whileTap={{ scale: 0.6 }}>
             <FontAwesomeIcon icon={faCartShopping} />
             <div className="cart-count">
               <p>2</p>
             </div>
-          </li>
+          </motion.li>
           <li>
             <div>
               <motion.img
@@ -112,21 +119,83 @@ const Nav = () => {
                 >
                   {user && user.email === "jastrzembowskikamil@gmail.com" && (
                     <Link to={"/createItem"}>
-                      <p>
+                      <p onClick={() => setisMenu(false)}>
                         <FontAwesomeIcon icon={faAdd} />
-                        New Item
+                        Dodaj produkt
                       </p>
                     </Link>
                   )}
+
                   <p onClick={logout}>
                     <FontAwesomeIcon icon={faArrowRightFromBracket} />
-                    Logout
+                    Wyloguj
                   </p>
                 </motion.div>
               )}
             </div>
           </li>
         </motion.ul>
+      </nav>
+      <nav
+        className={navbar ? "mobile navbar-white" : "mobile navbar-transparent"}
+      >
+        <motion.ul
+          initial={{ opacity: 0, x: 200 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 200 }}
+          className="nav-contact__box"
+        >
+          <li>
+            <FontAwesomeIcon icon={faEnvelope} />
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faFacebook} />
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faCartShopping} />
+            <div className="cart-count">
+              <p>2</p>
+            </div>
+          </li>
+        </motion.ul>
+        <Link to="/">
+          <img src={easylogo} alt="logo easybar" className="nav-logo"></img>
+        </Link>
+        <div>
+          <motion.img
+            whileTap={{ scale: 0.6 }}
+            src={user ? user.photoURL : avatar}
+            alt="avatar"
+            className="avatar"
+            onClick={login}
+          />
+          {isMenu && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.6 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.6 }}
+              className="login-dropdown"
+            >
+              {user && user.email === "jastrzembowskikamil@gmail.com" && (
+                <Link to={"/createItem"}>
+                  <p onClick={() => setisMenu(false)}>
+                    <FontAwesomeIcon icon={faAdd} />
+                    Dodaj produkt{" "}
+                  </p>
+                </Link>
+              )}
+              <p>Menu</p>
+              <p>
+                <Link to="/for-business">Dla firm</Link>
+              </p>
+              <p>Catering</p>
+              <p onClick={logout}>
+                <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                Wyloguj
+              </p>
+            </motion.div>
+          )}
+        </div>
       </nav>
     </>
   );
