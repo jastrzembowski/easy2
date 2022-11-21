@@ -32,102 +32,102 @@ export default function CreateContainer() {
   const [isLoading, setIsLoading] = useState(false);
   const [addons, setAddons] = useState(false)
 
-  const uploadImage = (e) => {
-    setIsLoading(true);
-    const imageFile = e.target.files[0];
-    const storageRef = ref(storage, `images/${Date.now()}-${imageFile.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+  // const uploadImage = (e) => {
+  //   setIsLoading(true);
+  //   const imageFile = e.target.files[0];
+  //   const storageRef = ref(storage, `images/${Date.now()}-${imageFile.name}`);
+  //   const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const uploadProgress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      },
-      (error) => {
-        console.log(error);
-        setFields(true);
-        setMsg("Nie udało się załadować pliku. Spróbuj ponownie");
-        setAlertStatus("danger");
-        setTimeout(() => {
-          setFields(false);
-          setIsLoading(false);
-        }, 4000);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImageAsset(downloadURL);
-          setIsLoading(false);
-          setFields(true);
-          setMsg("Zdjęcie dodane!! : ) ");
-          setAlertStatus("success");
-          setTimeout(() => {
-            setFields(false);
-          }, 4000);
-        });
-      }
-    );
-  };
-  const deleteImage = () => {
-    setIsLoading(true);
-    const deleteRef = ref(storage, imageAsset);
-    deleteObject(deleteRef).then(() => {
-      setImageAsset(null);
-      setIsLoading(false);
-      setFields(true);
-      setMsg("Usunięto obrazek! :)");
-      setAlertStatus("success");
-      setTimeout(() => {
-        setFields(false);
-      }, 4000);
-    });
-  };
-  const saveDetails = () => {
-    setIsLoading(true);
-    try {
-      if (!title || !price || !description || !category) {
-        setFields(true);
-        setMsg("Uzupełnij wymagane pola!!");
-        setAlertStatus("danger");
-        setTimeout(() => {
-          setFields(false);
-          setIsLoading(false);
-        }, 4000);
-      }
-      else {
-        const data = {
-          id: `${Date.now()}`,
-          title: title,
-          imageUrl: `${imageAsset?imageAsset:
-            "https://firebasestorage.googleapis.com/v0/b/easybar-9df33.appspot.com/o/images%2F1668774242826-food-placeholder.jpg?alt=media&token=26a9e9db-c15d-45cc-ba97-06ac76c5de69"}`,
-          category: category,
-          description: description,
-          qty: 1,
-          avaible: true,
-          addons: true,
-          price: price,
-        };
-        saveItem(data);
-        setIsLoading(false);
-        setFields(true);
-        setMsg("Udało się ");
-        setAlertStatus("success");
-        clearData();
-        setTimeout(() => {
-          setFields(false);
-        }, 4000);
-      }
-    } catch (error) {
-      console.log(error);
-      setFields(true);
-      setMsg("Nie udało się zapisać. Spróbuj ponownie");
-      setAlertStatus("danger");
-      setTimeout(() => {
-        setFields(false);
-        setIsLoading(false);
-      }, 4000);
-    }
-  };
+  //   uploadTask.on(
+  //     "state_changed",
+  //     (snapshot) => {
+  //       const uploadProgress =
+  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //       setFields(true);
+  //       setMsg("Nie udało się załadować pliku. Spróbuj ponownie");
+  //       setAlertStatus("danger");
+  //       setTimeout(() => {
+  //         setFields(false);
+  //         setIsLoading(false);
+  //       }, 4000);
+  //     },
+  //     () => {
+  //       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+  //         setImageAsset(downloadURL);
+  //         setIsLoading(false);
+  //         setFields(true);
+  //         setMsg("Zdjęcie dodane!! : ) ");
+  //         setAlertStatus("success");
+  //         setTimeout(() => {
+  //           setFields(false);
+  //         }, 4000);
+  //       });
+  //     }
+  //   );
+  // };
+  // const deleteImage = () => {
+  //   setIsLoading(true);
+  //   const deleteRef = ref(storage, imageAsset);
+  //   deleteObject(deleteRef).then(() => {
+  //     setImageAsset(null);
+  //     setIsLoading(false);
+  //     setFields(true);
+  //     setMsg("Usunięto obrazek! :)");
+  //     setAlertStatus("success");
+  //     setTimeout(() => {
+  //       setFields(false);
+  //     }, 4000);
+  //   });
+  // };
+  // const saveDetails = () => {
+  //   setIsLoading(true);
+  //   try {
+  //     if (!title || !price || !description || !category) {
+  //       setFields(true);
+  //       setMsg("Uzupełnij wymagane pola!!");
+  //       setAlertStatus("danger");
+  //       setTimeout(() => {
+  //         setFields(false);
+  //         setIsLoading(false);
+  //       }, 4000);
+  //     }
+  //     else {
+  //       const data = {
+  //         id: `${Date.now()}`,
+  //         title: title,
+  //         imageUrl: `${imageAsset?imageAsset:
+  //           "https://firebasestorage.googleapis.com/v0/b/easybar-9df33.appspot.com/o/images%2F1668774242826-food-placeholder.jpg?alt=media&token=26a9e9db-c15d-45cc-ba97-06ac76c5de69"}`,
+  //         category: category,
+  //         description: description,
+  //         qty: 1,
+  //         avaible: true,
+  //         addons: true,
+  //         price: price,
+  //       };
+  //       saveItem(data);
+  //       setIsLoading(false);
+  //       setFields(true);
+  //       setMsg("Udało się ");
+  //       setAlertStatus("success");
+  //       clearData();
+  //       setTimeout(() => {
+  //         setFields(false);
+  //       }, 4000);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     setFields(true);
+  //     setMsg("Nie udało się zapisać. Spróbuj ponownie");
+  //     setAlertStatus("danger");
+  //     setTimeout(() => {
+  //       setFields(false);
+  //       setIsLoading(false);
+  //     }, 4000);
+  //   }
+  // };
   const clearData = () => {
     setTitle("");
     setImageAsset(null);
