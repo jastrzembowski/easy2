@@ -9,7 +9,7 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { categories } from "../../utils/data";
-import { saveItem } from "../../utils/firebaseFunctions";
+import { getAllFoodItems, saveItem } from "../../utils/firebaseFunctions";
 import Loader from "./Loader";
 import {
   MdFastfood,
@@ -19,6 +19,8 @@ import {
   MdAttachMoney,
 } from "react-icons/md";
 import { storage } from "../../firebase.config";
+import { useStateValue } from "../../context/StateProvider";
+import { actionType } from "../../context/reducer";
 
 export default function CreateContainer() {
   const [title, setTitle] = useState("");
@@ -30,8 +32,17 @@ export default function CreateContainer() {
   const [alertStatus, setAlertStatus] = useState("danger");
   const [msg, setMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [addons, setAddons] = useState(false)
+  const [addons, setAddons] = useState(false);
+  const [{ menu }, dispatch] = useStateValue();
 
+  const fetchData = async () => {
+    await getAllFoodItems().then((data) => {
+      dispatch({
+        type: actionType.SET_MENU,
+        menu: data,
+      });
+    });
+  };
   const uploadImage = (e) => {
     setIsLoading(true);
     const imageFile = e.target.files[0];
@@ -85,7 +96,7 @@ export default function CreateContainer() {
   const saveDetails = () => {
     setIsLoading(true);
     try {
-      if (!title || !price || !description || !category) {
+      if (!title || !price || !category) {
         setFields(true);
         setMsg("Uzupełnij wymagane pola!!");
         setAlertStatus("danger");
@@ -93,13 +104,15 @@ export default function CreateContainer() {
           setFields(false);
           setIsLoading(false);
         }, 4000);
-      }
-      else {
+      } else {
         const data = {
           id: `${Date.now()}`,
           title: title,
-          imageUrl: `${imageAsset?imageAsset:
-            "https://firebasestorage.googleapis.com/v0/b/easybar-9df33.appspot.com/o/images%2F1668774242826-food-placeholder.jpg?alt=media&token=26a9e9db-c15d-45cc-ba97-06ac76c5de69"}`,
+          imageUrl: `${
+            imageAsset
+              ? imageAsset
+              : "https://firebasestorage.googleapis.com/v0/b/easybar-9df33.appspot.com/o/images%2F1668774242826-food-placeholder.jpg?alt=media&token=26a9e9db-c15d-45cc-ba97-06ac76c5de69"
+          }`,
           category: category,
           description: description,
           qty: 1,
@@ -127,6 +140,7 @@ export default function CreateContainer() {
         setIsLoading(false);
       }, 4000);
     }
+    fetchData();
   };
   const clearData = () => {
     setTitle("");
@@ -136,7 +150,7 @@ export default function CreateContainer() {
     setCategory(null);
     setAddons(false);
   };
-
+  console.log(category);
   return (
     <div className="create-container">
       {fields && (
@@ -178,8 +192,17 @@ export default function CreateContainer() {
           </select>
         </div>
         <div className="create-checkbox">
-          <input type="checkbox" checked={addons} onClick={()=>{setAddons(!addons);console.log( addons)}} /><p>Czy to danie jest serwowane z dodatkami?</p>
-       </div> <div className="img-box">
+          <input
+            type="checkbox"
+            checked={addons}
+            onClick={() => {
+              setAddons(!addons);
+              console.log(addons);
+            }}
+          />
+          <p>Czy to danie jest serwowane z dodatkami?</p>
+        </div>{" "}
+        <div className="img-box">
           {isLoading ? (
             <Loader />
           ) : (
@@ -246,6 +269,6 @@ export default function CreateContainer() {
           </button>
         </div>
       </div>
-          </div>
+    </div>
   );
 }

@@ -1,0 +1,66 @@
+@import "../../index.scss";
+
+section{
+    width: 100%;
+    .items-box{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title{
+            font-size:32px;
+            color: $main-dark;
+            font-weight: 800;
+            text-transform: uppercase;
+            position: relative;
+            margin-left: 5%;
+            &::before{
+                position: absolute;
+                content: "";
+                width: 60vw;
+                height: 3px;
+                bottom: -5px;
+                left: 0;
+                background-color: $orange;
+                transition: all ease-in-out 2s;
+            }
+        }
+        .buttons{
+            display: flex;
+            align-items: center;
+            div{
+                width: 32px;
+                height: 32px;
+                margin: 4px;
+                border-radius: 25%;
+                background-color: rgb(245, 198, 112);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+                &:hover{
+                    cursor: pointer;
+                    transition: 0.2s ease-out;
+                    background-color: $orange;
+                }
+                *{
+                    color: white;
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+}
+
+
+
+@media (max-width:700px){
+    section {
+        .items-box{
+            .buttons{
+                display: none;
+            }
+
+        }
+    }
+}

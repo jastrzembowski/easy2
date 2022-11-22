@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Opinions from "./Opinions";
 
 import head1 from "../../images/head1.png";
@@ -6,13 +6,30 @@ import feta1 from "../../images/feta1.png";
 import head2 from "../../images/head2.png";
 import "./main.scss";
 import Footer from "../footer/Footer";
+import MainRecommended from "./MainRecommended";
+import { useStateValue } from "../../context/StateProvider";
+import { getAllFoodItems } from "../../utils/firebaseFunctions";
+import { actionType } from "../../context/reducer";
 
 const Main = () => {
+  const [{ menu }, dispatch] = useStateValue();
+
+  const fetchData = async () => {
+    await getAllFoodItems().then((data) => {
+      dispatch({
+        type: actionType.SET_MENU,
+        menu: data,
+      });
+    });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
       <header className="header-main">
         <article className="head-text">
-          {" "}
           <h1>
             Pyszne domowe <br />
             jedzenie i nie tylko!
@@ -26,7 +43,6 @@ const Main = () => {
             zawsze świeże, dlatego codziennie znajdziesz u nas coś nowego!
           </p>
         </article>
-    
       </header>
       {/* <article className="main-feta">
         <img src={feta1} alt="feta" />
@@ -46,19 +62,16 @@ const Main = () => {
           </button>
         </aside>
       </article> */}
-
-      <Opinions/>
+  <MainRecommended/>
+      <Opinions />
 
       <div className="feed-text">
-        <h1>
-            Znajdź nas na facebooku
-        </h1>
+        <h1>Znajdź nas na facebooku</h1>
         <h3>i bądź na bieżąco</h3>
         {/* <span className="feed-circle"></span> */}
-  
       </div>
       {/* <div id="curator-feed-default-feed-layout"></div> */}
-    <Footer/>
+      <Footer />
     </>
   );
 };
