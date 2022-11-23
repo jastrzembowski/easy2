@@ -1,0 +1,124 @@
+@import "../../index.scss";
+
+section {
+  width: 100%;
+  margin-top: 50px;
+  .flex-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .menu-title {
+      font-size: 26px;
+      color: $main-dark;
+      font-weight: 800;
+      text-transform: uppercase;
+      position: relative;
+      margin-left: 5%;
+      &::before {
+        position: absolute;
+        content: "";
+        width: 60vw;
+        height: 3px;
+        bottom: -5px;
+        left: 0;
+        background-color: $orange;
+        transition: all ease-in-out 2s;
+      }
+    }
+    .filter-box {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      place-content: center;
+      overflow-x: scroll;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+      padding: 30px 0px;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .category-box {
+        background-color: rgba(255, 255, 255, 0.9);
+        height: 116px;
+        width: 96px;
+        margin: 8px;
+        min-width: 96px;
+        cursor: pointer;
+        border-radius: 15%;
+        -webkit-box-shadow: 3px 3px 24px 3px rgba(124, 124, 124, 0.1);
+        -moz-box-shadow: 3px 3px 24px 3px rgba(124, 124, 124, 0.1);
+        box-shadow: 3px 3px 24px 3px rgba(124, 124, 124, 0.1);
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        transition: 0.1s ease-in-out;
+        &:hover {
+          background-color: #91c09d;
+          -webkit-box-shadow: 3px 3px 24px 3px rgba(124, 124, 124, 0.3);
+          -moz-box-shadow: 3px 3px 24px 3px rgba(124, 124, 124, 0.3);
+          box-shadow: 3px 3px 24px 3px rgba(124, 124, 124, 0.3);
+
+          p {
+            color: white;
+          }
+          .icon {
+            background-color: white;
+            transition: 0.2s ease-in-out;
+
+            svg {
+              color: $dark-green;
+              transition: 0.2s ease-in-out;
+
+            }
+          }
+        }
+        .content-box{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        p {
+          margin: 5px 0px 0px 0px;
+          font-size: 14px;
+          height: 40%;
+          display: flex;
+          align-items: center;
+          transition: 0.2s ease-in-out;
+
+        }
+        .icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-color: $dark-green;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          svg {
+            color: white;
+            font-size: 21px;
+            padding: 0px 2px 2px 0px;
+          }
+        }
+      }
+      .active{
+        background-color: $green;
+
+      }
+    }
+  }
+}
+
+@media (max-width:750px){
+    section{
+        .flex-box{
+            .filter-box{
+                place-content: baseline;
+            }
+        }
+    }
+}

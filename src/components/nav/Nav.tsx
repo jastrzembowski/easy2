@@ -8,7 +8,6 @@ import { actionType } from "../../context/reducer";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCircleUser,
   faAdd,
   faArrowRightFromBracket,
   faEnvelope,
@@ -24,7 +23,7 @@ const Nav = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
 
   const [isMenu, setisMenu] = useState(false);
 
@@ -54,7 +53,12 @@ const Nav = () => {
       setNavbar(false);
     }
   };
-
+  const showCart = () => {
+    dispatch({
+      type: actionType.SET_CART_SHOW,
+      cartShow: !cartShow
+    })
+  }
   window.addEventListener("scroll", changeNav);
 
   return (
@@ -67,19 +71,16 @@ const Nav = () => {
       >
         <ul className="nav-buttons__holder">
           <li>
-            {" "}
-            <Link to="/for-business">MENU</Link>
+            <Link to="/menu">MENU</Link>
           </li>
           <li>
             <Link to="/for-business">DLA FIRM </Link>
           </li>
           <li>
-            {" "}
             <Link to="/for-business">CATERING </Link>
           </li>
         </ul>
         <Link to="/">
-          {" "}
           <img src={easylogo} alt="logo easybar" className="nav-logo"></img>
         </Link>
         <motion.ul
@@ -95,11 +96,13 @@ const Nav = () => {
             <FontAwesomeIcon icon={faFacebook} />
           </motion.li>
 
-          <motion.li whileTap={{ scale: 0.6 }}>
+          <motion.li whileTap={{ scale: 0.6 }} onClick={showCart}>
             <FontAwesomeIcon icon={faCartShopping} />
-            <div className="cart-count">
-              <p>2</p>
+            {cartItems && cartItems.length > 0 &&(
+              <div className="cart-count">
+              <p>{cartItems.length}</p>
             </div>
+          )}
           </motion.li>
           <li>
             <div>
@@ -151,11 +154,13 @@ const Nav = () => {
           <li>
             <FontAwesomeIcon icon={faFacebook} />
           </li>
-          <li>
+          <li onClick={showCart}>
             <FontAwesomeIcon icon={faCartShopping} />
-            <div className="cart-count">
-              <p>2</p>
+          {cartItems && cartItems.length > 0 &&(
+              <div className="cart-count">
+              <p>{cartItems.length}</p>
             </div>
+          )}
           </li>
         </motion.ul>
         <Link to="/">
@@ -180,15 +185,17 @@ const Nav = () => {
                 <Link to={"/createItem"}>
                   <p onClick={() => setisMenu(false)}>
                     <FontAwesomeIcon icon={faAdd} />
-                    Dodaj produkt{" "}
+                    Dodaj produkt
                   </p>
                 </Link>
               )}
-              <p>Menu</p>
+              <Link to="/menu">
+                <p  onClick={() => setisMenu(false)}>Menu</p>
+              </Link>
               <p>
                 <Link to="/for-business">Dla firm</Link>
               </p>
-              <p>Catering</p>
+              <p  onClick={() => setisMenu(false)}>Catering</p>
               <p onClick={logout}>
                 <FontAwesomeIcon icon={faArrowRightFromBracket} />
                 Wyloguj

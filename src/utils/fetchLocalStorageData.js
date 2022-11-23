@@ -5,3 +5,9 @@ export const fetchUser = () => {
 
     return userInfo
 }
+export const fetchCart = () => {
+    const cartInfo = localStorage.getItem('cartInfo') !== [] &&
+    JSON.parse(localStorage.getItem('cartInfo'))
+
+    return cartInfo 
+}
