@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import "./menu.scss";
 import { categories } from "../../utils/data";
 import { IoFastFood } from "react-icons/io5";
 import { motion } from "framer-motion";
 import RowContainer from "../main/RowContainer";
-import { useStateValue } from "../../context/StateProvider";
+import {listProducts } from "../../actions/productActions"
 const Menu = () => {
   const [filter, setfilter] = useState("recommended");
-  const [{ menu, dispatch }] = useStateValue();
+  const dispatch = useDispatch()
+
+  const productsList = useSelector((state) => state.productsList)
+  const {loading, error, products } = productsList
+
+
+  React.useEffect(()=> {
+    dispatch(listProducts())
+    console.log(products[0])
+  },[dispatch])
   return (
     <section>
       <div className="flex-box">
@@ -36,7 +46,7 @@ const Menu = () => {
           <RowContainer
             flag={false}
             scrollValue={0}
-            data={menu?.filter((n: any) => n.category == filter)}
+            data={products[0]?.filter((n) => n.category === filter)}
 />
         </div>
       </div>

@@ -22,7 +22,7 @@ export const categories = [
   {
     id: 5,
     name: "Naleśniki",
-    urlParamName: "soups",
+    urlParamName: "pancakes",
   },
   {
     id: 6,
@@ -32,7 +32,7 @@ export const categories = [
   {
     id: 7,
     name: "Makarony",
-    urlParamName: "soups",
+    urlParamName: "pastas",
   },
   {
     id: 8,

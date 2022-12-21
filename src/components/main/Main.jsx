@@ -1,31 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Opinions from "./Opinions";
 
-import head1 from "../../images/head1.png";
-import feta1 from "../../images/feta1.png";
-import head2 from "../../images/head2.png";
+// import head1 from "../../images/head1.png";
+// import feta1 from "../../images/feta1.png";
+// import head2 from "../../images/head2.png";
 import "./main.scss";
 import Footer from "../footer/Footer";
 import MainRecommended from "./MainRecommended";
-import { useStateValue } from "../../context/StateProvider";
-import { getAllFoodItems } from "../../utils/firebaseFunctions";
-import { actionType } from "../../context/reducer";
 
 const Main = () => {
-  const [{ menu }, dispatch] = useStateValue();
 
-  const fetchData = async () => {
-    await getAllFoodItems().then((data) => {
-      dispatch({
-        type: actionType.SET_MENU,
-        menu: data,
-      });
-    });
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
   return (
     <>
       <header className="header-main">

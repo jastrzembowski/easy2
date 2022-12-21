@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./nav.scss";
 import { Link } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../../firebase.config";
-import { useStateValue } from "../../context/StateProvider";
-import { actionType } from "../../context/reducer";
+
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -19,47 +18,45 @@ import easylogo from "../../images/easylogo.png";
 
 const Nav = () => {
   const [navbar, setNavbar] = useState(false);
-
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
+  // const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
+  // const [isMenu, setisMenu] = useState(false);
 
-  const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
+  // const login = async () => {
+  //   if (!user) {
+  //     const {
+  //       user: { refreshToken, providerData },
+  //     } = await signInWithPopup(firebaseAuth, provider);
+  //     dispatch({
+  //       type: actionType.SET_USER,
+  //       user: providerData[0],
+  //     });
+  //     localStorage.setItem("user", JSON.stringify(providerData[0]));
+  //   } else {
+  //     setisMenu(!isMenu);
+  //   }
+  // };
+  // const logout = () => {
+  //   setisMenu(false);
+  //   localStorage.clear();
+  //   dispatch({ type: actionType.SET_USER, user: null });
+  // };
+  // const changeNav = () => {
+  //   if (window.scrollY >= 30) {
+  //     setNavbar(true);
+  //   } else {
+  //     setNavbar(false);
+  //   }
+  // };
+  // const showCart = () => {
+  //   dispatch({
+  //     type: actionType.SET_CART_SHOW,
+  //     cartShow: !cartShow,
+  //   });
+  // };
 
-  const [isMenu, setisMenu] = useState(false);
-
-  const login = async () => {
-    if (!user) {
-      const {
-        user: { refreshToken, providerData },
-      } = await signInWithPopup(firebaseAuth, provider);
-      dispatch({
-        type: actionType.SET_USER,
-        user: providerData[0],
-      });
-      localStorage.setItem("user", JSON.stringify(providerData[0]));
-    } else {
-      setisMenu(!isMenu);
-    }
-  };
-  const logout = () => {
-    setisMenu(false);
-    localStorage.clear();
-    dispatch({ type: actionType.SET_USER, user: null });
-  };
-  const changeNav = () => {
-    if (window.scrollY >= 30) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
-  const showCart = () => {
-    dispatch({
-      type: actionType.SET_CART_SHOW,
-      cartShow: !cartShow
-    })
-  }
-  window.addEventListener("scroll", changeNav);
+  // window.addEventListener("scroll", changeNav);
 
   return (
     <>
@@ -95,16 +92,20 @@ const Nav = () => {
           <motion.li whileTap={{ scale: 0.6 }}>
             <FontAwesomeIcon icon={faFacebook} />
           </motion.li>
-
+{/* 
           <motion.li whileTap={{ scale: 0.6 }} onClick={showCart}>
             <FontAwesomeIcon icon={faCartShopping} />
-            {cartItems && cartItems.length > 0 &&(
+            {cartItems && cartItems.length > 0 && (
               <div className="cart-count">
-              <p>{cartItems.length}</p>
-            </div>
-          )}
-          </motion.li>
-          <li>
+                <p>
+                  {cartItems.reduce(function (accumulator: any, item: any) {
+                    return accumulator + item.qty;
+                  }, 0)}
+                </p>
+              </div>
+            )}
+          </motion.li> */}
+          {/* <li>
             <div>
               <motion.img
                 whileTap={{ scale: 0.6 }}
@@ -136,7 +137,7 @@ const Nav = () => {
                 </motion.div>
               )}
             </div>
-          </li>
+          </li> */}
         </motion.ul>
       </nav>
       <nav
@@ -154,19 +155,19 @@ const Nav = () => {
           <li>
             <FontAwesomeIcon icon={faFacebook} />
           </li>
-          <li onClick={showCart}>
+          {/* <li onClick={showCart}>
             <FontAwesomeIcon icon={faCartShopping} />
-          {cartItems && cartItems.length > 0 &&(
+            {cartItems && cartItems.length > 0 && (
               <div className="cart-count">
-              <p>{cartItems.length}</p>
-            </div>
-          )}
-          </li>
+                <p>{cartItems.length}</p>
+              </div>
+            )}
+          </li> */}
         </motion.ul>
         <Link to="/">
           <img src={easylogo} alt="logo easybar" className="nav-logo"></img>
         </Link>
-        <div>
+        {/* <div>
           <motion.img
             whileTap={{ scale: 0.6 }}
             src={user ? user.photoURL : avatar}
@@ -190,19 +191,19 @@ const Nav = () => {
                 </Link>
               )}
               <Link to="/menu">
-                <p  onClick={() => setisMenu(false)}>Menu</p>
+                <p onClick={() => setisMenu(false)}>Menu</p>
               </Link>
               <p>
                 <Link to="/for-business">Dla firm</Link>
               </p>
-              <p  onClick={() => setisMenu(false)}>Catering</p>
+              <p onClick={() => setisMenu(false)}>Catering</p>
               <p onClick={logout}>
                 <FontAwesomeIcon icon={faArrowRightFromBracket} />
                 Wyloguj
               </p>
             </motion.div>
           )}
-        </div>
+        </div> */}
       </nav>
     </>
   );

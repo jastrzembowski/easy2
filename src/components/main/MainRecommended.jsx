@@ -3,10 +3,9 @@ import "./mainrecommended.scss";
 import RowContainer from "./RowContainer";
 import { motion } from "framer-motion";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { useStateValue } from "../../context/StateProvider";
 
 export default function MainRecommended() {
-  const [{ menu }, dispatch] = useStateValue();
+
   const [scrollValue, setScrollValue] = useState(0);
   useEffect(() => {}, [scrollValue]);
   return (
@@ -25,7 +24,7 @@ export default function MainRecommended() {
       <RowContainer
       scrollValue={scrollValue}
         flag={true}
-        data={menu?.filter((n) => n.category === "recommended")}
+        // data={menu?.filter((n) => n.category === "recommended")}
       />
     </section>
   );

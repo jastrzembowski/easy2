@@ -19,7 +19,6 @@ import {
   MdAttachMoney,
 } from "react-icons/md";
 import { storage } from "../../firebase.config";
-import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
 
 export default function CreateContainer() {
@@ -33,16 +32,7 @@ export default function CreateContainer() {
   const [msg, setMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [addons, setAddons] = useState(false);
-  const [{ menu }, dispatch] = useStateValue();
 
-  const fetchData = async () => {
-    await getAllFoodItems().then((data) => {
-      dispatch({
-        type: actionType.SET_MENU,
-        menu: data,
-      });
-    });
-  };
   const uploadImage = (e) => {
     setIsLoading(true);
     const imageFile = e.target.files[0];
@@ -140,7 +130,6 @@ export default function CreateContainer() {
         setIsLoading(false);
       }, 4000);
     }
-    fetchData();
   };
   const clearData = () => {
     setTitle("");

@@ -9,10 +9,8 @@ import Nav from "./components/nav/Nav";
 import CreateContainer from "./components/createcontainer/CreateContainer";
 import CartContainer from "./components/CartContainer";
 import Business from "./components/bussiness/Business";
-import { useStateValue } from "./context/StateProvider";
 
 function App() {
-  const [{cartShow}, dispatch] = useStateValue()
   return (
     <AnimatePresence exitBeforeEnter>
       <Nav />
@@ -22,9 +20,9 @@ function App() {
         <Route path="/createItem" element={<CreateContainer />} />
         <Route path="/menu" element={<Menu />} />
       </Routes>
-      {cartShow && (
+      {/* {cartShow && ( */}
         <CartContainer />
-      )}
+      {/* )} */}
     </AnimatePresence>
   );
 }
